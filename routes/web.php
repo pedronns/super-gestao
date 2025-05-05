@@ -42,21 +42,19 @@ Route::get(
 
 // rotas privadas
 
-Route::prefix('/app')->group(function () {
-
-    Route::middleware(AutenticacaoMiddleware::class)->get(
+Route::middleware(AutenticacaoMiddleware::class)->prefix('/app')->group(function () {
+    Route::get(
         '/clientes',
         function () {
             return 'clientes';
         })->name('app.clientes');
 
-    Route::middleware(AutenticacaoMiddleware::class)->get(
-        '/fornecedores',
-        [FornecedorController::class, 'index'
+    Route::get(
+        '/fornecedores', [
+        FornecedorController::class, 'index'
         ])->name('app.fornecedores');
 
-
-    Route::middleware(AutenticacaoMiddleware::class)->get(
+    Route::get(
         '/produtos',
         function () {
             return 'produtos';
