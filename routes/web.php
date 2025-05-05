@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TesteController;
 use App\Http\Controllers\FornecedorController;
 
-use App\Http\Middleware\LogAcessoMiddleware;
+use App\Http\Middleware\AutenticacaoMiddleware;
 
 /*
 Route::get('/', function () {
@@ -44,17 +44,20 @@ Route::get(
 
 Route::prefix('/app')->group(function () {
 
-    Route::get('/clientes',
+    Route::middleware(AutenticacaoMiddleware::class)->get(
+        '/clientes',
         function () {
             return 'clientes';
         })->name('app.clientes');
 
-    Route::get('/fornecedores',
+    Route::middleware(AutenticacaoMiddleware::class)->get(
+        '/fornecedores',
         [FornecedorController::class, 'index'
         ])->name('app.fornecedores');
 
 
-    Route::get('/produtos',
+    Route::middleware(AutenticacaoMiddleware::class)->get(
+        '/produtos',
         function () {
             return 'produtos';
         })->name('app.produtos');
