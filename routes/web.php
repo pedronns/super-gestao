@@ -12,20 +12,17 @@ Route::get('/', function () {
 });
  */
 
-Route::middleware(LogAcessoMiddleware::class)
-    ->get('/',
+Route::get('/',
     [\App\Http\Controllers\PrincipalController::class,
     'principal'
 ])->name('site.index');
 
-Route::middleware(LogAcessoMiddleware::class)
-    ->get('/sobre-nos',
+Route::get('/sobre-nos',
     [\App\Http\Controllers\SobreNosController::class,
     'sobreNos'
 ])->name('site.sobrenos');
 
-Route::middleware(LogAcessoMiddleware::class)
-    ->get('/contato',
+Route::get('/contato',
     [\App\Http\Controllers\ContatoController::class,
     'contato'
 ])->name('site.contato');
