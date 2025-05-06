@@ -33,16 +33,20 @@ Route::post(
     'salvar'
 ])->name('site.contato');
 
-Route::get(
-    '/login',
-    function () {
-        return 'Login';
-})->name('site.login');
+Route::get('/login', 
+    [\App\Http\Controllers\LoginController::class,
+    'index'
+])->name('site.login');
+
+Route::post('/login', 
+    [\App\Http\Controllers\LoginController::class,
+    'autenticar'
+])->name('site.login');
 
 
 // rotas privadas
 
-Route::middleware(AutenticacaoMiddleware::class)->prefix('/app')->group(function () {
+Route::middleware('autenticacao:padrao,visitante')->prefix('/app')->group(function () {
     Route::get(
         '/clientes',
         function () {

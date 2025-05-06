@@ -26,20 +26,20 @@ class ContatoController extends Controller
         ];
 
         $feedback = [
-            'nome.required' => 'O campo "Nome" precisa ser preenchido',
-            'nome.min' => 'O campo "Nome" precisa ter pelo menos 3 caracteres',
-            'nome.max' => 'O campo "Nome" deve ter até 100 caracteres',
-            'nome.unique' => 'O nome informado já está em uso',
+            'nome.required' => 'Obrigatório',
+            'nome.min' => 'Mín. 3 caracteres',
+            'nome.max' => 'Máx. 100 caracteres',
+            'nome.unique' => 'Nome já usado',
 
-            'telefone.required' => 'O campo "Telefone" precisa ser preenchido',
+            'telefone.required' => 'Obrigatório',
 
-            'email.required' => 'O campo "E-mail" precisa ser preenchido',
-            'email.email' => 'O e-mail informado não existe',
+            'email.required' => 'Obrigatório',
+            'email.email' => 'E-mail inválido',
 
-            'motivo_contatos_id.required' => 'Por favor, informe o motivo do contato',
+            'motivo_contatos_id.required' => 'Escolha um motivo',
 
-            'mensagem.required' => 'Escreva sua mensagem',
-            'mensagem.max' => 'A mensagem deve ter até 1000 caracteres'
+            'mensagem.required' => 'Digite a mensagem',
+            'mensagem.max' => 'Máx. 1000 caracteres'
         ];
 
         $request->validate($regras, $feedback);

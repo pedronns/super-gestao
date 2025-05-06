@@ -8,7 +8,7 @@ body {
 
 p,
 span {
-    color: #ffffff;
+    color: #333;
 }
 
 h1 {
@@ -30,7 +30,7 @@ button {
     margin: 10px 0px 10px 0px;
     box-sizing: border-box;
     border-radius: 3px;
-    background-color: transparent;
+    background-color: inherit;
     color: #333;
 }
 
@@ -40,10 +40,64 @@ button {
 
 .borda-branca {
     border: solid 1px #fff;
+    border-radius: 5px;
 }
 
 .borda-preta {
     border: solid 1px #333;
+    border-radius: 5px;
+}
+
+.borda-vermelha {
+    border: solid 1px #f00;
+    border-radius: 5px;
+}
+
+.login-form {
+    position: relative;
+}
+
+.input-container,
+.textarea-container {
+    position: relative;
+}
+
+.input-container .msg-erro-principal,
+.textarea-container .msg-erro-principal {
+    background-color: #2a9ee2;
+    padding: 3px;
+    position: absolute;
+    font-size: 12px;
+    color: red;
+}
+
+.input-container .msg-erro-principal {
+    right: 10px;
+    top: 36px;
+}
+
+.textarea-container .msg-erro-principal {
+    right: 10px;
+    top: 50px;
+}
+
+.input-container .msg-erro-contato,
+.textarea-container .msg-erro-contato {
+    position: absolute;
+    background-color: #fff;
+    padding: 3px;
+    font-size: 12px;
+    color: red;
+}
+
+.input-container .msg-erro-contato {
+    right: 10px;
+    top: 36px;
+}
+
+.textarea-container .msg-erro-contato {
+    right: 10px;
+    top: 50px;
 }
 
 button {
@@ -61,19 +115,11 @@ button:hover {
     opacity: 1;
 }
 
-:-ms-input-placeholder {
-    color: #333333;
-}
-
-::-ms-input-placeholder {
-    color: #333333;
-}
-
 /* --- NAVBAR (atualizado com flexbox) --- */
 .topo {
     width: 100%;
     background-color: #f8f8f8;
-    position: absolute;
+    position: relative;
     padding: 0 40px;
     height: 80px;
     display: flex;
@@ -84,10 +130,6 @@ button:hover {
 
 .logo {
     width: 50px;
-}
-
-.menu {
-    /* não precisa mais de float */
 }
 
 .menu ul {
@@ -117,25 +159,21 @@ button:hover {
     width: 100%;
     height: 100vh;
     min-height: 800px;
+    display: flex;
 }
 
 .esquerda {
-    float: left;
     background-color: #268fd0;
     width: 60%;
     height: 100%;
 }
 
 .direita {
-    float: right;
     background-color: #2a9ee2;
     width: 40%;
     height: 100%;
 }
 
-.esquerda h1, .direita h1 {
-    margin-top: 150px;
-}
 
 .informacoes,
 .contato {
@@ -171,13 +209,13 @@ button:hover {
 }
 
 .titulo-pagina {
-    padding: 120px 0px 40px 0px;
+    padding: 40px 0;
     background-color: #2a9ee2;
     text-align: center;
 }
 
 .titulo-pagina h1 {
-    margin: 0; 
+    margin: 0;
     color: #ffffff;
     font-size: 28px;
 }
@@ -193,24 +231,26 @@ button:hover {
 
 /* --- RODAPÉ --- */
 .rodape {
+    display: flex;
     width: 100%;
+    height: 250px;
+    background-color: #f8f8f8;
+    border-top: 1px solid #ccc;
 }
 
 .redes-sociais,
 .area-contato,
 .localizacao {
     width: 33.333%;
-    border-top: solid 1px #ccc;
-    float: left;
     text-align: center;
-    background-color: #f8f8f8;
-    height: 250px;
 }
 
-.redes-sociais,
-.area-contato,
+.redes-sociais p,
+.area-contato p,
 .localizacao p,
-span {
+.redes-sociais span,
+.area-contato span,
+.localizacao span {
     color: #333333;
 }
 
