@@ -1,7 +1,7 @@
 @extends('site.layouts.basico')
 
 @section('titulo', $titulo)
-@section('classe-body', 'pagina-contato')
+{{-- @section('classe-body', 'pagina-contato') --}}
 
 @section('conteudo')
     <div class="conteudo-pagina">
