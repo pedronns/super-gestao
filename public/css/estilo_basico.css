@@ -62,8 +62,15 @@ button {
     position: relative;
 }
 
-.input-container .msg-erro-principal,
-.textarea-container .msg-erro-principal {
+.msg-erro {
+    font-size: 12px;
+    color: red;
+    background-color: transparent;
+    margin-bottom: .8rem;
+}
+
+.input-container .msg-erro-azul,
+.textarea-container .msg-erro-azul {
     background-color: #2a9ee2;
     padding: 3px;
     position: absolute;
@@ -71,18 +78,18 @@ button {
     color: red;
 }
 
-.input-container .msg-erro-principal {
+.input-container .msg-erro-azul {
     right: 10px;
     top: 36px;
 }
 
-.textarea-container .msg-erro-principal {
+.textarea-container .msg-erro-azul {
     right: 10px;
     top: 50px;
 }
 
-.input-container .msg-erro-contato,
-.textarea-container .msg-erro-contato {
+.input-container .msg-erro-branco,
+.textarea-container .msg-erro-branco {
     position: absolute;
     background-color: #fff;
     padding: 3px;
@@ -90,12 +97,12 @@ button {
     color: red;
 }
 
-.input-container .msg-erro-contato {
+.input-container .msg-erro-branco {
     right: 10px;
     top: 36px;
 }
 
-.textarea-container .msg-erro-contato {
+.textarea-container .msg-erro-branco {
     right: 10px;
     top: 50px;
 }

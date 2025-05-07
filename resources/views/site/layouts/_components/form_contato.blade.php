@@ -52,9 +52,12 @@
         <textarea style="resize: none" name="mensagem" class={{ $errors->any('mensagem') ? 'borda-vermelha' : $classe }}
             placeholder="Preencha aqui a sua mensagem">
         </textarea>
+
+    @if ($errors->any())
         <div class={{$erro}}>
             {{ $errors->has('mensagem') ? $errors->first('mensagem') : '' }}
         </div>
+    @endif
     </div>
 
 

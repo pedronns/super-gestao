@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TesteController;
 use App\Http\Controllers\FornecedorController;
+use App\Http\Controllers\LoginController;
 
 use App\Http\Middleware\AutenticacaoMiddleware;
 
@@ -33,7 +34,7 @@ Route::post(
     'salvar'
 ])->name('site.contato');
 
-Route::get('/login', 
+Route::get('/login/{erro?}', 
     [\App\Http\Controllers\LoginController::class,
     'index'
 ])->name('site.login');
@@ -46,23 +47,20 @@ Route::post('/login',
 
 // rotas privadas
 
-Route::middleware('autenticacao:padrao,visitante')->prefix('/app')->group(function () {
-    Route::get(
-        '/clientes',
+Route::middleware('autenticacao:padrao,visitante')->prefix('app')->name('app.')->group(function () {
+    Route::get('/clientes',
         function () {
             return 'clientes';
-        })->name('app.clientes');
+        })->name('clientes');
 
-    Route::get(
-        '/fornecedores', [
+    Route::get('/fornecedores', [
         FornecedorController::class, 'index'
-        ])->name('app.fornecedores');
+        ])->name('fornecedores');
 
-    Route::get(
-        '/produtos',
+    Route::get('/produtos',
         function () {
             return 'produtos';
-        })->name('app.produtos');
+        })->name('produtos');
 });
 
 
