@@ -216,6 +216,7 @@ button:hover {
 }
 
 .titulo-pagina {
+    margin: 0;
     padding: 40px 0;
     background-color: #2a9ee2;
     text-align: center;
