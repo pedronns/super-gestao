@@ -14,52 +14,64 @@
         <div class="menu">
             <ul>
                 <li>
-                    <a href="{{route('app.fornecedor.adicionar')}}">Novo</a>
-                    <a href="{{route('app.fornecedor')}}">Consulta</a>
+                    <a href="{{ route('app.fornecedor.adicionar') }}">Novo</a>
+                    <a href="{{ route('app.fornecedor') }}">Consulta</a>
                 </li>
             </ul>
         </div>
 
         <div class="informacao-pagina">
+            
             <div style="width: 30%; margin-left:auto; margin-right:auto">
-                <form method="post" action="{{route('app.fornecedor.adicionar')}}">
+                <form method="post" action="{{ route('app.fornecedor.adicionar') }}">
                     @csrf
                     <div class="input-container">
-                        <input type="text" name="nome" placeholder="Nome" class={{ $errors->any('usuario') ? 'borda-vermelha' : 'borda-preta' }}>
+                        <input type="text" name="nome" placeholder="Nome"
+                        class={{ $errors->any('usuario') ? 'borda-vermelha' : 'borda-preta' }}>
                         @if ($errors->any('nome'))
                         <div class="msg-erro-branco">{{ $errors->has('nome') ? $errors->first('nome') : '' }}</div>
                         @endif
                     </div>
-
+                    
                     <div class="input-container">
-                        <input type="text" name="site" placeholder="Site" class={{ $errors->any('usuario') ? 'borda-vermelha' : 'borda-preta' }}>
+                        <input type="text" name="site" placeholder="Site"
+                        class={{ $errors->any('usuario') ? 'borda-vermelha' : 'borda-preta' }}>
                         @if ($errors->any('site'))
                         <div class="msg-erro-branco">{{ $errors->has('site') ? $errors->first('site') : '' }}</div>
                         @endif
                     </div>
-
+                    
                     <div class="input-container">
                         <select name="uf" class="{{ $errors->has('uf') ? 'borda-vermelha' : 'borda-preta' }}">
                             <option value="" disabled {{ old('uf') ? '' : 'selected' }}>Estado</option>
-                            @foreach(['AC','AL','AP','AM','BA','CE','DF','ES','GO','MA','MT','MS','MG','PA','PB','PR','PE','PI','RJ','RN','RS','RO','RR','SC','SP','SE','TO'] as $estado)
-                                <option value="{{ $estado }}" {{ old('uf') == $estado ? 'selected' : '' }}>{{ $estado }}</option>
-                            @endforeach
-                        </select>
+                            @foreach (['AC', 'AL', 'AP', 'AM', 'BA', 'CE', 'DF', 'ES', 'GO', 'MA', 'MT', 'MS', 'MG', 'PA', 'PB', 'PR', 'PE', 'PI', 'RJ', 'RN', 'RS', 'RO', 'RR', 'SC', 'SP', 'SE', 'TO'] as $estado)
+                            <option value="{{ $estado }}" {{ old('uf') == $estado ? 'selected' : '' }}>
+                                {{ $estado }}</option>
+                                @endforeach
+                            </select>
+                            
+                            @if ($errors->any('uf'))
+                            <div class="msg-erro-branco">{{ $errors->has('uf') ? $errors->first('uf') : '' }}</div>
+                            @endif
+                        </div>
                         
-                        @if ($errors->any('uf'))
-                        <div class="msg-erro-branco">{{ $errors->has('uf') ? $errors->first('uf') : '' }}</div>
-                        @endif
-                    </div>
-
                     <div class="input-container">
-                        <input type="text" name="email" placeholder="E-mail" class={{ $errors->has('email')? 'borda-vermelha' : 'borda-preta' }}>
+                        <input type="text" name="email" placeholder="E-mail"
+                        class={{ $errors->has('email') ? 'borda-vermelha' : 'borda-preta' }}>
                         <div class="msg-erro-branco">{{ $errors->has('email') ? $errors->first('email') : '' }}</div>
                     </div>
-
+                    
                     <button type="submit" class="borda-preta">Cadastrar</button>
                 </form>
+
+                @if ($msg != '')
+                    <div class="msg-sucesso">    
+                        {{ $msg }}
+                    </div>
+                @endif
             </div>
         </div>
     </div>
-
-@endsection
+    
+    @endsection
+    

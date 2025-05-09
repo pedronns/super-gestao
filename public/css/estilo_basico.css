@@ -62,6 +62,13 @@ button {
     position: relative;
 }
 
+.msg-sucesso {
+    font-size: 12px;
+    color: lime;
+    background-color: transparent;
+    margin-bottom: .8rem;
+}
+
 .msg-erro {
     font-size: 12px;
     color: red;

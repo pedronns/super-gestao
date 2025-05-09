@@ -27,14 +27,14 @@
                     <div class="input-container">
                         <input type="text" name="nome" placeholder="Nome" class={{ $errors->any('usuario') ? 'borda-vermelha' : 'borda-preta' }}>
                         @if ($errors->any('nome'))
-                        <div class="msg-erro-branco">{{ $errors->has('nome') ? $errors->first('nome') : '' }}</div>
+                            <div class="msg-erro-branco">{{ $errors->has('nome') ? $errors->first('nome') : '' }}</div>
                         @endif
                     </div>
 
                     <div class="input-container">
                         <input type="text" name="site" placeholder="Site" class={{ $errors->any('usuario') ? 'borda-vermelha' : 'borda-preta' }}>
                         @if ($errors->any('site'))
-                        <div class="msg-erro-branco">{{ $errors->has('site') ? $errors->first('site') : '' }}</div>
+                            <div class="msg-erro-branco">{{ $errors->has('site') ? $errors->first('site') : '' }}</div>
                         @endif
                     </div>
 
@@ -47,7 +47,7 @@
                         </select>
                         
                         @if ($errors->any('uf'))
-                        <div class="msg-erro-branco">{{ $errors->has('uf') ? $errors->first('uf') : '' }}</div>
+                            <div class="msg-erro-branco">{{ $errors->has('uf') ? $errors->first('uf') : '' }}</div>
                         @endif
                     </div>
 
