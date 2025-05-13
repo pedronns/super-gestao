@@ -10,110 +10,59 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\ProdutoController;
 
-/*
-Route::get('/', function () {
-    return 'Olá';
-});
- */
+// página inicial
+Route::get('/', [\App\Http\Controllers\PrincipalController::class, 'principal'])->name('site.index');
 
-Route::get(
-    '/',
-    [\App\Http\Controllers\PrincipalController::class,
-    'principal'
-]
-)->name('site.index');
+// página "Sobre Nós"
+Route::get('/sobre-nos', [\App\Http\Controllers\SobreNosController::class, 'sobreNos'])->name('site.sobrenos');
 
-Route::get(
-    '/sobre-nos',
-    [\App\Http\Controllers\SobreNosController::class,
-    'sobreNos'
-]
-)->name('site.sobrenos');
+// página de contato (exibição do formulário)
+Route::get('/contato', [\App\Http\Controllers\ContatoController::class, 'contato'])->name('site.contato');
 
-Route::get(
-    '/contato',
-    [\App\Http\Controllers\ContatoController::class,
-    'contato'
-]
-)->name('site.contato');
+// processar o envio do formulário de contato
+Route::post('/contato', [\App\Http\Controllers\ContatoController::class, 'salvar'])->name('site.contato');
 
-Route::post(
-    '/contato',
-    [\App\Http\Controllers\ContatoController::class,
-    'salvar'
-]
-)->name('site.contato');
+// exibir o formulário de login
+Route::get('/login/{erro?}', [\App\Http\Controllers\LoginController::class, 'index'])->name('site.login');
 
-Route::get(
-    '/login/{erro?}',
-    [\App\Http\Controllers\LoginController::class,
-    'index'
-]
-)->name('site.login');
+// processar a autenticação do usuário
+Route::post('/login', [\App\Http\Controllers\LoginController::class, 'autenticar'])->name('site.login');
 
-Route::post(
-    '/login',
-    [\App\Http\Controllers\LoginController::class,
-    'autenticar'
-]
-)->name('site.login');
-
-
-// rotas privadas
-
+// Rotas protegidas por autenticação
 Route::middleware('autenticacao:padrao,visitante')->prefix('app')->name('app.')->group(function () {
-    Route::get('/home', [
-        HomeController::class, 'index'
-        ])->name('home');
 
-    Route::get('/sair', [
-        LoginController::class, 'sair'
-        ])->name('sair');
+    // página inicial do aplicativo
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-    Route::get('/cliente', [
-        ClienteController::class, 'index'
-        ])->name('cliente');
+    // logout do sistema
+    Route::get('/sair', [LoginController::class, 'sair'])->name('sair');
 
+    // listar clientes
+    Route::get('/cliente', [ClienteController::class, 'index'])->name('cliente');
 
-    Route::get('/fornecedor', [
-        FornecedorController::class, 'index'
-        ])->name('fornecedor');
+    // listar fornecedores (GET)
+    Route::get('/fornecedor', [FornecedorController::class, 'index'])->name('fornecedor');
 
-    Route::post('/fornecedor/listar', [
-        FornecedorController::class, 'listar'
-        ])->name('fornecedor.listar');
+    // listar fornecedores (POST)
+    Route::post('/fornecedor/listar', [FornecedorController::class, 'listar'])->name('fornecedor.listar');
 
-    
-    Route::get('/fornecedor/adicionar', [
-        FornecedorController::class, 'adicionar'
-        ])->name('fornecedor.adicionar');
+    // adicionar um novo fornecedor
+    Route::get('/fornecedor/adicionar', [FornecedorController::class, 'adicionar'])->name('fornecedor.adicionar');
 
-    Route::post('/fornecedor/adicionar', [
-        FornecedorController::class, 'adicionar'
-        ])->name('fornecedor.adicionar');
+    // processar o envio do formulário de adição de fornecedor
+    Route::post('/fornecedor/adicionar', [FornecedorController::class, 'adicionar'])->name('fornecedor.adicionar');
 
+    // editar fornecedores
+    Route::get('/fornecedor/editar/{id}/{msg?}', [FornecedorController::class, 'editar'])->name('fornecedor.editar');
 
-    Route::get('/fornecedor/listar', [
-        FornecedorController::class, 'listar'
-        ])->name('fornecedor.listar');
-
-    Route::get('/produto', [
-        ProdutoController::class, 'index'
-        ])->name('produto');
-
-    
+    // página de produtos
+    Route::get('/produto', [ProdutoController::class, 'index'])->name('produto');
 });
 
+// Rota de teste com parâmetros dinâmicos
+Route::get('/teste/{p1}/{p2}', [TesteController::class, 'teste'])->name('teste');
 
-
-Route::get(
-    '/teste/{p1}/{p2}',
-    [TesteController::class, 'teste'
-    ]
-)->name('teste');
-
-
+// Rota de fallback
 Route::fallback(function () {
-    echo 'A rota acessada não existe. Clique <a href="'.route('site.index'
-    ).'"/>aqui</a> para ir para a página inicial';
+    echo 'A rota acessada não existe. Clique <a href="'.route('site.index').'"/>aqui</a> para ir para a página inicial';
 });
