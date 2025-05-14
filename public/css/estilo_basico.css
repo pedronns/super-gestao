@@ -14,7 +14,7 @@ span {
 }
 
 h1 {
-    color: #ffffff;
+    color: #ffffff; 
     font-size: 28px;
 }
 
@@ -246,7 +246,13 @@ button:hover {
     color: #333;
 }
 
+ul {
+    display: flex;
+    gap: 1rem; 
+}
+
 /* --- RODAPÉ --- */
+
 .rodape {
     display: flex;
     width: 100%;

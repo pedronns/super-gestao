@@ -1,6 +1,6 @@
 @extends('app.layouts.basico')
 
-@section('titulo', 'Fornecedor')
+@section('titulo', 'Produto')
 
 @section('conteudo')
 
@@ -9,17 +9,17 @@
 <div class="conteudo-pagina">
     <div class="titulo-pagina">
         <h1>
-            Fornecedor - Lista
+            Lista de produtos
         </h1>
     </div>
 
     <div class="flex justify-center">
         <ul class="flex items-center">
             <li>
-                <a href="{{{ route('app.fornecedor.adicionar') }}}">Novo</a>
+                <a href="{{route('app.produto.create')}}">Novo</a>
             </li>
             <li>
-                <a href="{{{ route('app.fornecedor') }}}">Consulta</a>
+                <a href="">Consulta</a>
             </li>
         </ul>
     </div>
@@ -31,26 +31,26 @@
                 <thead class="bg-gray-100 text-gray-700">
                     <tr>
                         <th class="px-4 py-2  text-left font-semibold">Nome</th>
-                        <th class="px-4 py-2 text-left font-semibold">Site</th>
-                        <th class="px-4 py-2 text-left font-semibold">Estado</th>
-                        <th class="px-4 py-2 text-left font-semibold">E-mail</th>
+                        <th class="px-4 py-2 text-left font-semibold">Descrição</th>
+                        <th class="px-4 py-2 text-left font-semibold">Peso</th>
+                        <th class="px-4 py-2 text-left font-semibold">Unidade ID</th>
                         <th class="px-4 py-2"></th>
                         <th class="px-4 py-2"></th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
-                    @foreach ($fornecedores as $fornecedor )
+                    @foreach ($produtos as $produto )
                         <tr class="hover:bg-gray-50">
-                            <td class="px-4 py-2">{{ $fornecedor->nome }}</td>
-                            <td class="px-4 py-2">{{ $fornecedor->site }}</td>
-                            <td class="px-4 py-2">{{ $fornecedor->uf }}</td>
-                            <td class="px-4 py-2">{{ $fornecedor->email }}</td>
+                            <td class="px-4 py-2">{{ $produto->nome }}</td>
+                            <td class="px-4 py-2">{{ $produto->descricao }}</td>
+                            <td class="px-4 py-2">{{ $produto->peso }}</td>
+                            <td class="px-4 py-2">{{ $produto->unidade_id }}</td>
                             <td class="px-4 py-2 text-red-600 cursor-pointer hover:underline">
-                                <a href="{{route('app.fornecedor.excluir', $fornecedor->id)}}"
+                                <a href=""
                                     class="text-blue-600 font-bold hover:underline">Excluir</a>
                             </td>
                             <td class="px-4 py-2">
-                                <a href="{{ route('app.fornecedor.editar', $fornecedor->id) }}"
+                                <a href=""
                                     class="text-blue-600 font-bold hover:underline">Editar</a>
                             </td>
                         </tr>
@@ -60,7 +60,7 @@
 
         </div>
             <div>
-                {{$fornecedores->links('vendor.pagination.tailwind')}}
+                {{$produtos->links('vendor.pagination.tailwind')}}
             </div>
     </div>
 </div>

@@ -10,6 +10,8 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\ProdutoController;
 
+// obs: por enquanto, trabalhando apenas com GET e POST
+
 // página inicial
 Route::get('/', [\App\Http\Controllers\PrincipalController::class, 'principal'])->name('site.index');
 
@@ -58,8 +60,11 @@ Route::middleware('autenticacao:padrao,visitante')->prefix('app')->name('app.')-
     // editar fornecedores
     Route::get('/fornecedor/editar/{id}/{msg?}', [FornecedorController::class, 'editar'])->name('fornecedor.editar');
 
+    // deletar fornecedores
+    Route::get('/fornecedor/excluir/{id}', [FornecedorController::class, 'excluir'])->name('fornecedor.excluir');
+
     // página de produtos
-    Route::get('/produto', [ProdutoController::class, 'index'])->name('produto');
+    Route::resource('produto', ProdutoController::class);
 });
 
 // Rota de teste com parâmetros dinâmicos
