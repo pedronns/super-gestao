@@ -40,11 +40,14 @@ Route::middleware('autenticacao:padrao,visitante')->prefix('app')->name('app.')-
     // listar clientes
     Route::get('/cliente', [ClienteController::class, 'index'])->name('cliente');
 
-    // listar fornecedores (GET)
+    // index fornecedores
     Route::get('/fornecedor', [FornecedorController::class, 'index'])->name('fornecedor');
 
     // listar fornecedores (POST)
     Route::post('/fornecedor/listar', [FornecedorController::class, 'listar'])->name('fornecedor.listar');
+
+    // list fornecedores (GET)
+    Route::get('/fornecedor/listar', [FornecedorController::class, 'listar'])->name('fornecedor.listar');
 
     // adicionar um novo fornecedor
     Route::get('/fornecedor/adicionar', [FornecedorController::class, 'adicionar'])->name('fornecedor.adicionar');

@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 body {
     display: flex;
     flex-direction: column;
@@ -64,7 +66,7 @@ button {
 
 .msg-sucesso {
     font-size: 12px;
-    color: lime;
+    color: #2a9ee2;
     background-color: transparent;
     margin-bottom: .8rem;
 }
