@@ -122,9 +122,9 @@ button {
     color: #fff;
 }
 
-button:hover {
+/* button:hover {
     background-color: #6ea22c;
-}
+} */
 
 ::placeholder {
     color: #333333;

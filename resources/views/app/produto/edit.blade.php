@@ -5,7 +5,7 @@
 @section('conteudo')
     <div class="flex flex-col min-h-screen font-['Roboto',sans-serif] text-[#333]">
         <div class="py-10 bg-[#2a9ee2] text-center">
-            <h1 class="m-0 text-white text-[28px]">Adicionar produto</h1>
+            <h1 class="m-0 text-white text-[28px]">Editar produto</h1>
         </div>
 
         <div class="flex justify-center mt-6">
@@ -16,12 +16,14 @@
 
         <div class="text-center mt-10">
             <div class="w-[30%] mx-auto">
-                <form method="post" action="{{ route('app.produto.store') }}">
+                <form method="post" action="{{ route('app.produto.update', ['produto' => $produto->id]) }}">
                     @csrf
+                    @method('PUT')
 
                     {{-- Nome --}}
                     <div class="relative mb-6">
-                        <input type="text" name="nome" value="{{ old('nome') ?? '' }}" placeholder="Nome"
+                        <input type="text" name="nome" value="{{ $produto->nome ?? (old('nome') ?? '') }}"
+                            placeholder="Nome"
                             class="w-full p-[10px_15px] box-border rounded-[5px] bg-inherit text-[#333]
                                {{ $errors->has('nome') ? 'border border-red-500' : 'border border-[#333]' }}">
                         @if ($errors->has('nome'))
@@ -33,7 +35,8 @@
 
                     {{-- Descrição --}}
                     <div class="relative mb-6">
-                        <input type="text" name="descricao" value="{{ old('descricao') ?? '' }}" placeholder="Descrição"
+                        <input type="text" name="descricao" value="{{ $produto->descricao ?? (old('descricao') ?? '') }}"
+                            placeholder="Descrição"
                             class="w-full p-[10px_15px] box-border rounded-[5px] bg-inherit text-[#333]
                                {{ $errors->has('descricao') ? 'border border-red-500' : 'border border-[#333]' }}">
                         @if ($errors->has('descricao'))
@@ -45,7 +48,8 @@
 
                     {{-- Peso --}}
                     <div class="relative mb-6">
-                        <input type="text" name="peso" value="{{ old('peso') ?? '' }}" placeholder="Peso"
+                        <input type="text" name="peso" value="{{ $produto->peso ?? (old('peso') ?? '') }}"
+                            placeholder="Peso"
                             class="w-full p-[10px_15px] box-border rounded-[5px] bg-inherit text-[#333]
                                {{ $errors->has('peso') ? 'border border-red-500' : 'border border-[#333]' }}">
                         @if ($errors->has('peso'))
@@ -60,11 +64,12 @@
                         <select name="unidade_id"
                             class="w-full p-[10px_15px] box-border rounded-[5px] bg-inherit text-[#333]
                                {{ $errors->has('unidade_id') ? 'border border-red-500' : 'border border-[#333]' }}">
-                            <option value="" disabled {{ old('unidade_id') == null ? 'selected' : '' }}>Unidade de
-                                medida</option>
+                            <option value="" disabled {{ old('unidade_id') == null ? 'selected' : '' }}>
+                                Unidade de medida
+                            </option>
                             @foreach ($unidades as $unidade)
                                 <option value="{{ $unidade->id }}"
-                                    {{ (old('unidade_id') ?? '') == $unidade->id ? 'selected' : '' }}>
+                                    {{ $produto->nome ?? (old('unidade_id') ?? '' == $unidade->id) ? 'selected' : '' }}>
                                     {{ $unidade->descricao }}
                                 </option>
                             @endforeach
@@ -78,7 +83,7 @@
 
                     <button type="submit"
                         class="w-full p-[10px_15px] my-[10px] rounded-[3px] bg-[#7ab829] text-white hover:bg-[#6ea22c]">
-                        Cadastrar
+                        Editar
                     </button>
                 </form>
 

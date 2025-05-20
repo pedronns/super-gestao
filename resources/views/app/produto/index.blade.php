@@ -48,17 +48,26 @@
                                 <td class="px-4 py-2">{{ $produto->peso }}</td>
                                 <td class="px-4 py-2">{{ $produto->unidade_id }}</td>
 
+                                {{-- Visualizar --}}
                                 <td class="px-4 py-2 text-red-600 cursor-pointer hover:underline">
                                     <a href="{{ route('app.produto.show', ['produto' => $produto->id]) }}"
                                         class="text-blue-600 font-bold hover:underline">Visualizar</a>
                                 </td>
 
+                                {{-- Excluir --}}
                                 <td class="px-4 py-2 text-red-600 cursor-pointer hover:underline">
-                                    <a href="" class="text-blue-600 font-bold hover:underline">Excluir</a>
+                                    <form method="post" action="{{route('app.produto.destroy', ['produto' => $produto->id])}}">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" class="text-blue-600 font-bold hover:underline">Excluir</button>
+                                        {{-- <a href="" class="text-blue-600 font-bold hover:underline">Excluir</a> --}}
+                                    </form>
                                 </td>
 
+                                {{-- Editar --}}
                                 <td class="px-4 py-2">
-                                    <a href="" class="text-blue-600 font-bold hover:underline">Editar</a>
+                                    <a href="{{ route('app.produto.edit', ['produto' => $produto->id]) }}"
+                                        class="text-blue-600 font-bold hover:underline">Editar</a>
                                 </td>
                             </tr>
                         @endforeach
