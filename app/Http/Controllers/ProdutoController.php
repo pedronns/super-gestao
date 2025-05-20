@@ -31,16 +31,42 @@ class ProdutoController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        //
+    {   
+        $regras = [
+            'nome' => 'required|min:3|max:50',
+            'descricao' => 'required|min:3|max:200',
+            'peso' => 'required|integer',
+            'unidade_id' => 'required|exists:unidades,id',
+        ];
+
+        $feedback = [
+            'required' => 'Informe o :attribute.',
+            'descricao.required' => 'Informe a descrição.',
+            
+            'nome.min' => 'Nome muito curto (3).',
+            'nome.max' => 'Nome muito longo (50).',
+
+            'descricao.min' => 'Descrição muito curta (3).',
+            'desccicao.max' => 'Descrição muito longa (200).',
+
+            'peso.integer' => 'Apenas números inteiros.',
+
+            'unidade_id.exists' => 'A unidade não existe.',
+            'unidade_id.required' => 'Informe a unidade.'
+        ];
+
+        $request->validate($regras, $feedback);
+
+        Produto::create($request->all());
+        return redirect()->route('app.produto.index');
     }
 
     /**
      * Display the specified resource.
      */
     public function show(Produto $produto)
-    {
-        //
+    {   
+        return view ('app.produto.show', ['produto' => $produto]);
     }
 
     /**

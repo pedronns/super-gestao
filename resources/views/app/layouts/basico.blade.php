@@ -5,6 +5,8 @@
     <title>Super Gestão - @yield('titulo')</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="{{ asset('css/estilo_basico.css') }}">
+
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
