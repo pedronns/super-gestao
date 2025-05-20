@@ -13,7 +13,7 @@
         class="w-full p-[10px_15px] box-border rounded-[5px] bg-inherit text-[#333]
                                {{ $errors->has('nome') ? 'border border-red-500' : 'border border-[#333]' }}">
     @if ($errors->has('nome'))
-        <div class="absolute top-[36px] right-[10px] bg-white p-1 text-xs text-red-600">
+        <div class="absolute top-[32px] right-[10px] bg-white p-1 text-xs text-red-600">
             {{ $errors->first('nome') }}
         </div>
     @endif
@@ -26,7 +26,7 @@
         class="w-full p-[10px_15px] box-border rounded-[5px] bg-inherit text-[#333]
                                {{ $errors->has('descricao') ? 'border border-red-500' : 'border border-[#333]' }}">
     @if ($errors->has('descricao'))
-        <div class="absolute top-[36px] right-[10px] bg-white p-1 text-xs text-red-600">
+        <div class="absolute top-[32px] right-[10px] bg-white p-1 text-xs text-red-600">
             {{ $errors->first('descricao') }}
         </div>
     @endif
@@ -38,7 +38,7 @@
         class="w-full p-[10px_15px] box-border rounded-[5px] bg-inherit text-[#333]
                                {{ $errors->has('peso') ? 'border border-red-500' : 'border border-[#333]' }}">
     @if ($errors->has('peso'))
-        <div class="absolute top-[36px] right-[10px] bg-white p-1 text-xs text-red-600">
+        <div class="absolute top-[32px] right-[10px] bg-white p-1 text-xs text-red-600">
             {{ $errors->first('peso') }}
         </div>
     @endif
@@ -59,7 +59,7 @@
         @endforeach
     </select>
     @if ($errors->has('unidade_id'))
-        <div class="absolute top-[36px] right-[10px] bg-white p-1 text-xs text-red-600">
+        <div class="absolute top-[28px] right-[10px] bg-white p-1 text-xs text-red-600">
             {{ $errors->first('unidade_id') }}
         </div>
     @endif
