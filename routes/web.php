@@ -9,6 +9,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\ProdutoController;
+use App\Http\Controllers\ProdutoDetalheController;
 
 // obs: por enquanto, trabalhando apenas com GET e POST
 
@@ -65,6 +66,9 @@ Route::middleware('autenticacao:padrao,visitante')->prefix('app')->name('app.')-
 
     // página de produtos
     Route::resource('produto', ProdutoController::class);
+
+    // página de detalhes do produto
+    Route::resource('produto-detalhe', ProdutoDetalheController::class);
 });
 
 // Rota de teste com parâmetros dinâmicos
