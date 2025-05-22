@@ -35,6 +35,9 @@
                             <th class="w-2/5 px-4 py-2 text-center font-semibold">Descrição</th>
                             <th class="w-1/6 px-4 py-2 text-center font-semibold">Peso</th>
                             <th class="w-1/6 px-4 py-2 text-center font-semibold">Unidade ID</th>
+                            <th class="w-1/6 px-4 py-2 text-center font-semibold">Comprimento</th>
+                            <th class="w-1/6 px-4 py-2 text-center font-semibold">Largura</th>
+                            <th class="w-1/6 px-4 py-2 text-center font-semibold">Altura</th>
                             <th class="w-12 px-4 py-2 text-center"></th>
                             <th class="w-12 px-4 py-2 text-center"></th>
                             <th class="w-12 px-4 py-2 text-center"></th>
@@ -43,31 +46,32 @@
                     <tbody class="divide-y divide-gray-200">
                         @foreach ($produtos as $produto)
                             <tr class="hover:bg-gray-50">
-                                <td class="px-4 py-2">{{ $produto->nome }}</td>
-                                <td class="px-4 py-2">{{ $produto->descricao }}</td>
-                                <td class="px-4 py-2">{{ $produto->peso }}</td>
-                                <td class="px-4 py-2">{{ $produto->unidade_id }}</td>
+                                <td class="px-4 py-2 min-w-[160px]">{{ $produto->nome }}</td>
+                                <td class="px-4 py-2 min-w-[280px]">{{ $produto->descricao }}</td>
+                                <td class="px-4 py-2 w-20 text-center">{{ $produto->peso }}</td>
+                                <td class="px-4 py-2 w-20 text-center">{{ $produto->unidade_id }}</td>
+                                <td class="px-4 py-2 w-24 text-center">{{ $produto->produtoDetalhe->comprimento ?? '' }}</td>
+                                <td class="px-4 py-2 w-24 text-center">{{ $produto->produtoDetalhe->largura ?? ''}}</td>
+                                <td class="px-4 py-2 w-24 text-center">{{ $produto->produtoDetalhe->altura ?? '' }}</td>
 
                                 {{-- Visualizar --}}
-                                <td class="px-4 py-2 text-red-600 cursor-pointer hover:underline">
-                                    <a href="{{ route('app.produto.show', ['produto' => $produto->id]) }}"
-                                        class="text-blue-600 font-bold hover:underline">Visualizar</a>
+                                <td class="px-4 py-2 text-blue-600 cursor-pointer hover:underline text-center font-bold">
+                                    <a href="{{ route('app.produto.show', ['produto' => $produto->id]) }}">Visualizar</a>
                                 </td>
 
                                 {{-- Excluir --}}
-                                <td class="px-4 py-2 text-red-600 cursor-pointer hover:underline">
-                                    <form method="post" action="{{route('app.produto.destroy', ['produto' => $produto->id])}}">
+                                <td class="px-4 py-2 text-blue-600 cursor-pointer hover:underline text-center font-bold">
+                                    <form method="post"
+                                        action="{{ route('app.produto.destroy', ['produto' => $produto->id]) }}">
                                         @method('DELETE')
                                         @csrf
-                                        <button type="submit" class="text-blue-600 font-bold hover:underline">Excluir</button>
-                                        {{-- <a href="" class="text-blue-600 font-bold hover:underline">Excluir</a> --}}
+                                        <button type="submit">Excluir</button>
                                     </form>
                                 </td>
 
                                 {{-- Editar --}}
-                                <td class="px-4 py-2">
-                                    <a href="{{ route('app.produto.edit', ['produto' => $produto->id]) }}"
-                                        class="text-blue-600 font-bold hover:underline">Editar</a>
+                                <td class="px-4 py-2 text-blue-600 cursor-pointer hover:underline text-center font-bold">
+                                    <a href="{{ route('app.produto.edit', ['produto' => $produto->id]) }}">Editar</a>
                                 </td>
                             </tr>
                         @endforeach

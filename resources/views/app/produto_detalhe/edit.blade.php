@@ -15,8 +15,20 @@
         </div>
 
         <div class="text-center mt-10">
+            <h2 class="text-3xl font-bold text-gray-900 mb-2">
+                {{ $produto_detalhe->produto->nome }}
+            </h2>
+            <p class="text-base text-gray-600 mb-6">
+                {{ $produto_detalhe->produto->descricao }}
+            </p>
+
+
+
             <div class="w-[30%] mx-auto">
-                @component('app.produto_detalhe._components.form_create_edit', ['produto_detalhe' => $produto_detalhe, 'unidades' => $unidades])
+                @component('app.produto_detalhe._components.form_create_edit', [
+                    'produto_detalhe' => $produto_detalhe,
+                    'unidades' => $unidades,
+                ])
                 @endcomponent
 
                 @if ($msg ?? '')
