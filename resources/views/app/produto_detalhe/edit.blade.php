@@ -16,10 +16,10 @@
 
         <div class="text-center mt-10">
             <h2 class="text-3xl font-bold text-gray-900 mb-2">
-                {{ $produto_detalhe->produto->nome }}
+                {{ $produto_detalhe->item->nome }}
             </h2>
             <p class="text-base text-gray-600 mb-6">
-                {{ $produto_detalhe->produto->descricao }}
+                {{ $produto_detalhe->item->descricao }}
             </p>
 
 

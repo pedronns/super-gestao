@@ -10,7 +10,6 @@
 
     <div class="flex justify-center mt-6">
         <ul class="flex gap-4">
-            <li><a href="{{ route('app.fornecedor.adicionar') }}" class="text-[#333] hover:text-[#268fd0]">Novo</a></li>
             <li><a href="{{ route('app.fornecedor') }}" class="text-[#333] hover:text-[#268fd0]">Consulta</a></li>
         </ul>
     </div>

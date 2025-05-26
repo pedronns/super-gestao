@@ -19,6 +19,7 @@ class FornecedorController extends Controller
             ->where('site', 'like', '%'.$request->input('site').'%')
             ->where('uf', 'like', '%'.$request->input('uf').'%')
             ->where('email', 'like', '%'.$request->input('email').'%')
+            ->with('produtos')
             ->paginate(5);
 
         return view('app.fornecedor.listar', ['fornecedores' => $fornecedores]);
