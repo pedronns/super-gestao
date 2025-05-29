@@ -63,7 +63,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($fornecedor->produtos as $produto)
+                                        @forelse ($fornecedor->produtos as $key => $produto)
                                             <tr>
                                                 <td class="px-4 py-2 text-gray-600">{{ $produto->id }}</td>
                                                 <td class="px-4 py-2 text-gray-600">{{ $produto->nome }}</td>

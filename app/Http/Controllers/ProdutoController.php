@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produto;
+use App\Models\Fornecedor;
 use App\Models\Item;
 use App\Models\Unidade;
 use App\Models\ProdutoDetalhe;
@@ -19,6 +20,7 @@ class ProdutoController extends Controller
             'descricao' => 'required|min:3|max:200',
             'peso' => 'required|integer',
             'unidade_id' => 'required|exists:unidades,id',
+            'fornecedor_id' => 'required|exists:fornecedores,id',
         ];
     }
 
@@ -39,6 +41,9 @@ class ProdutoController extends Controller
 
             'unidade_id.exists' => 'A unidade selecionada não existe.',
             'unidade_id.required' => 'Informe a unidade.',
+
+            'unidade_id.exists' => 'O fornecedor selecionado não existe.',
+            'fornecedor_id.required' => 'Informe o fornecedor.',
         ];
     }
 
@@ -52,7 +57,8 @@ class ProdutoController extends Controller
     public function create(Request $request)
     {
         $unidades = Unidade::all();
-        return view('app.produto.create', ['unidades' => $unidades]);
+        $fornecedores = Fornecedor::all();
+        return view('app.produto.create', ['unidades' => $unidades, 'fornecedores' => $fornecedores]);
     }
 
     public function store(Request $request)
@@ -65,17 +71,20 @@ class ProdutoController extends Controller
 
     public function show(Produto $produto)
     {
-        return view('app.produto.show', ['produto' => $produto]);
+        $fornecedor = Fornecedor::where('id', $produto->fornecedor_id)->first();
+        return view('app.produto.show', ['produto' => $produto, 'fornecedor' => $fornecedor]);
     }
 
     public function edit(Produto $produto)
     {
         $unidades = Unidade::all();
-        return view('app.produto.edit', ['produto'=> $produto, 'unidades' => $unidades]);
+        $fornecedores = Fornecedor::all();
+
+        return view('app.produto.edit', ['produto'=> $produto, 'unidades' => $unidades, 'fornecedores' => $fornecedores]);
         // return view('app.produto.create', ['produto' => $produto, 'unidades' => $unidades]);
     }
 
-    public function update(Request $request, Produto $produto)
+    public function update(Request $request, Item $produto)
     {
         $request->validate($this->regrasValidacao(), $this->feedbackValidacao());
 

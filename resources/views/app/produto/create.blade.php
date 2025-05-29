@@ -16,7 +16,7 @@
 
 
         <div class="w-[30%] mx-auto text-center mt-10">
-            @component('app.produto._components.form_create_edit', ['unidades' => $unidades])
+            @component('app.produto._components.form_create_edit', ['unidades' => $unidades, 'fornecedores' => $fornecedores])
             @endcomponent
 
             @if ($msg ?? '')

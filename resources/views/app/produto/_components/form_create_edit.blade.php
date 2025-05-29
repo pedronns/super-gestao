@@ -7,6 +7,28 @@
             @csrf
 @endif
 
+{{-- Fornecedor --}}
+<div class="relative mb-6">
+    <select name="fornecedor_id"
+        class="w-full p-[10px_15px] box-border rounded-[5px] bg-inherit text-[#333]
+            {{ $errors->has('fornecedor_id') ? 'border border-red-500' : 'border border-[#333]' }}">
+        <option value="" disabled {{ old('fornecedor_id') == null ? 'selected' : '' }}>Fornecedor
+        </option>
+        @foreach ($fornecedores as $fornecedor)
+            <option value="{{ $fornecedor->id }}"
+                {{ (old('fornecedor_id') ?? $produto->fornecedor_id ?? '') == $fornecedor->id ? 'selected' : '' }}>
+                {{ $fornecedor->nome }}
+            </option>
+        @endforeach
+    </select>
+    @if ($errors->has('fornecedor_id'))
+        <div class="absolute top-[28px] right-[10px] bg-white p-1 text-xs text-red-600">
+            {{ $errors->first('fornecedor_id') }}
+        </div>
+    @endif
+</div>
+
+
 {{-- Nome --}}
 <div class="relative mb-6">
     <input type="text" name="nome" value="{{ $produto->nome ?? (old('nome') ?? '') }}" placeholder="Nome"
