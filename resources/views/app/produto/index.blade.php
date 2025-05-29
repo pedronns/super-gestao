@@ -42,40 +42,53 @@
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
-                        @foreach ($produtos as $produto)
-                            <tr class="hover:bg-gray-50">
-                                <td class="px-4 py-2 whitespace-nowrap">{{ $produto->nome }}</td>
-                                <td class="px-4 py-2 whitespace-nowrap">{{ $produto->descricao }}</td>
-                                <td class="px-4 py-2 whitespace-nowrap">{{ $produto->fornecedor->nome }}</td>
-                                <td class="px-4 py-2 text-center">{{ $produto->peso }}</td>
-                                <td class="px-4 py-2 text-center">{{ $produto->unidade_id }}</td>
-                                <td class="px-4 py-2 text-center">{{ $produto->produtoDetalhe->comprimento ?? '' }}</td>
-                                <td class="px-4 py-2 text-center">{{ $produto->produtoDetalhe->largura ?? '' }}</td>
-                                <td class="px-4 py-2 text-center">{{ $produto->produtoDetalhe->altura ?? '' }}</td>
+                        @if ($produtos->count() > 0)
+                            @foreach ($produtos as $produto)
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-4 py-2 whitespace-nowrap">{{ $produto->nome }}</td>
+                                    <td class="px-4 py-2 whitespace-nowrap">{{ $produto->descricao }}</td>
+                                    <td class="px-4 py-2 whitespace-nowrap">{{ $produto->fornecedor->nome }}</td>
+                                    <td class="px-4 py-2 text-center">{{ $produto->peso }}</td>
+                                    <td class="px-4 py-2 text-center">{{ $produto->unidade_id }}</td>
+                                    <td class="px-4 py-2 text-center">{{ $produto->produtoDetalhe->comprimento ?? '' }}</td>
+                                    <td class="px-4 py-2 text-center">{{ $produto->produtoDetalhe->largura ?? '' }}</td>
+                                    <td class="px-4 py-2 text-center">{{ $produto->produtoDetalhe->altura ?? '' }}</td>
 
-                                {{-- Visualizar --}}
-                                <td class="px-4 py-2 text-blue-600 cursor-pointer hover:underline text-center font-bold">
-                                    <a href="{{ route('app.produto.show', ['produto' => $produto->id]) }}">Visualizar</a>
-                                </td>
+                                    {{-- Visualizar --}}
+                                    <td
+                                        class="px-4 py-2 text-blue-600 cursor-pointer hover:underline text-center font-bold">
+                                        <a
+                                            href="{{ route('app.produto.show', ['produto' => $produto->id]) }}">Visualizar</a>
+                                    </td>
 
-                                {{-- Excluir --}}
-                                <td class="px-4 py-2 text-blue-600 cursor-pointer hover:underline text-center font-bold">
-                                    <form method="post"
-                                        action="{{ route('app.produto.destroy', ['produto' => $produto->id]) }}">
-                                        @method('DELETE')
-                                        @csrf
-                                        <button type="submit">Excluir</button>
-                                    </form>
-                                </td>
+                                    {{-- Excluir --}}
+                                    <td
+                                        class="px-4 py-2 text-blue-600 cursor-pointer hover:underline text-center font-bold">
+                                        <form method="post"
+                                            action="{{ route('app.produto.destroy', ['produto' => $produto->id]) }}">
+                                            @method('DELETE')
+                                            @csrf
+                                            <button type="submit">Excluir</button>
+                                        </form>
+                                    </td>
 
-                                {{-- Editar --}}
-                                <td class="px-4 py-2 text-blue-600 cursor-pointer hover:underline text-center font-bold">
-                                    <a href="{{ route('app.produto.edit', ['produto' => $produto->id]) }}">Editar</a>
+                                    {{-- Editar --}}
+                                    <td
+                                        class="px-4 py-2 text-blue-600 cursor-pointer hover:underline text-center font-bold">
+                                        <a href="{{ route('app.produto.edit', ['produto' => $produto->id]) }}">Editar</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @else
+                            <tr>
+                                <td colspan="11" class="px-4 py-6 text-center text-gray-500">
+                                    Não há produtos a serem exibidos.
                                 </td>
                             </tr>
-                        @endforeach
+                        @endif
                     </tbody>
                 </table>
+
             </div>
         </div>
 

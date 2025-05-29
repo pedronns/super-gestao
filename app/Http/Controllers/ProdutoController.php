@@ -11,8 +11,7 @@ use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
 {
-    // regras de validação
-
+    // regras
     private function regrasValidacao(): array
     {
         return [
@@ -35,14 +34,14 @@ class ProdutoController extends Controller
             'nome.max' => 'Nome muito longo (máximo 50 caracteres).',
 
             'descricao.min' => 'Descrição muito curta (mínimo 3 caracteres).',
-            'descricao.max' => 'Descrição muito longa (máximo 200 caracteres).',
+            'descricao.max' => 'Descrição muito longa (máximo :max caracteres).',
 
             'peso.integer' => 'O campo peso deve conter apenas números inteiros.',
 
             'unidade_id.exists' => 'A unidade selecionada não existe.',
             'unidade_id.required' => 'Informe a unidade.',
 
-            'unidade_id.exists' => 'O fornecedor selecionado não existe.',
+            'fornecedor_id.exists' => 'O fornecedor selecionado não existe.',
             'fornecedor_id.required' => 'Informe o fornecedor.',
         ];
     }
@@ -65,7 +64,7 @@ class ProdutoController extends Controller
     {
         $request->validate($this->regrasValidacao(), $this->feedbackValidacao());
 
-        Produto::create($request->all());
+        Item::create($request->all());
         return redirect()->route('app.produto.index');
     }
 
@@ -81,7 +80,6 @@ class ProdutoController extends Controller
         $fornecedores = Fornecedor::all();
 
         return view('app.produto.edit', ['produto'=> $produto, 'unidades' => $unidades, 'fornecedores' => $fornecedores]);
-        // return view('app.produto.create', ['produto' => $produto, 'unidades' => $unidades]);
     }
 
     public function update(Request $request, Item $produto)

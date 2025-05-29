@@ -6,12 +6,12 @@ use App\Http\Middleware\AutenticacaoMiddleware;
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\FornecedorController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProdutoDetalheController;
-
-// obs: por enquanto, trabalhando apenas com GET e POST
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\PedidoProdutoController;
 
 // página inicial
 Route::get('/', [\App\Http\Controllers\PrincipalController::class, 'principal'])->name('site.index');
@@ -40,16 +40,13 @@ Route::middleware('autenticacao:padrao,visitante')->prefix('app')->name('app.')-
     // logout do sistema
     Route::get('/sair', [LoginController::class, 'sair'])->name('sair');
 
-    // listar clientes
-    Route::get('/cliente', [ClienteController::class, 'index'])->name('cliente');
-
     // index fornecedores
     Route::get('/fornecedor', [FornecedorController::class, 'index'])->name('fornecedor');
 
     // listar fornecedores (POST)
     Route::post('/fornecedor/listar', [FornecedorController::class, 'listar'])->name('fornecedor.listar');
 
-    // list fornecedores (GET)
+    // listar fornecedores (GET)
     Route::get('/fornecedor/listar', [FornecedorController::class, 'listar'])->name('fornecedor.listar');
 
     // adicionar um novo fornecedor
@@ -69,6 +66,15 @@ Route::middleware('autenticacao:padrao,visitante')->prefix('app')->name('app.')-
 
     // página de detalhes do produto
     Route::resource('produto-detalhe', ProdutoDetalheController::class);
+
+    // página de clientes
+    Route::resource('cliente', ClienteController::class);
+    
+    // página de pedidos
+    Route::resource('pedido', PedidoController::class);
+    
+    // rotas para gerenciar os produtos dentro de pedidos
+    Route::resource('pedido-produto', PedidoProdutoController::class);
 });
 
 // Rota de teste com parâmetros dinâmicos
@@ -76,5 +82,5 @@ Route::get('/teste/{p1}/{p2}', [TesteController::class, 'teste'])->name('teste')
 
 // Rota de fallback
 Route::fallback(function () {
-    echo 'A rota acessada não existe. Clique <a href="'.route('site.index').'"/>aqui</a> para ir para a página inicial';
+    echo 'A rota acessada não existe. Clique <a href="' . route('site.index') . '">aqui</a> para ir para a página inicial';
 });
