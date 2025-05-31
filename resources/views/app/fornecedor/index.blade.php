@@ -6,7 +6,7 @@
 
     <div class="flex flex-col min-h-screen font-['Roboto',sans-serif] text-[#333]">
         <div class="py-10 bg-[#2a9ee2] text-center">
-            <h1 class="m-0 text-white text-[28px]">Fornecedor</h1>
+            <h1 class="m-0 text-white text-[28px]">Fornecedor - Pesquisar</h1>
         </div>
 
         <div class="flex justify-center mt-6">
