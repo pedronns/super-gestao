@@ -53,12 +53,12 @@
                                     {{ $produto->pivot->created_at->format('d/m/Y') }}
                                 </td>
                                 <td class="px-4 py-2 border-b border-gray-200 text-center align-middle">
-                                    <form id="form_{{ $pedido->id }}_{{ $produto->id }}" method="post"
-                                        action="{{ route('app.pedido-produto.destroy', ['pedido' => $pedido->id, 'produto' => $produto->id]) }}">
+                                    <form id="form_{{ $produto->pivot->id }}" method="post"
+                                        action="{{ route('app.pedido-produto.destroy', ['pedidoProduto' => $produto->pivot->id, 'pedido_id' => $pedido->id]) }}">
                                         @method('DELETE')
                                         @csrf
                                         <a href="#"
-                                            onclick="document.getElementById('form_{{ $pedido->id }}_{{ $produto->id }}').submit()">Excluir</a>
+                                            onclick="document.getElementById('form_{{ $produto->pivot->id }}').submit()">Excluir</a>
                                     </form>
                                 </td>
                             </tr>
