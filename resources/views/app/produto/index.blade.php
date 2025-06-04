@@ -78,6 +78,22 @@
                                         <a href="{{ route('app.produto.edit', ['produto' => $produto->id]) }}">Editar</a>
                                     </td>
                                 </tr>
+
+                                <tr class="hover:bg-gray-50">
+                                    <td colspan="12">
+                                        @if ($produto->pedidos->isNotEmpty())
+                                            <p class="font-semibold mb-1">ID dos pedidos</p>
+                                            @foreach ($produto->pedidos as $pedido)
+                                                <a href="{{ route('app.pedido-produto.create', ['pedido' => $pedido->id]) }}"
+                                                    class="text-blue-600 hover:underline">
+                                                    {{ $pedido->id }}@if (!$loop->last), @endif
+                                                </a>
+                                            @endforeach
+                                        @else
+                                            <p class="text-gray-500 italic">Vazia</p>
+                                        @endif
+                                    </td>
+                                </tr>
                             @endforeach
                         @else
                             <tr>

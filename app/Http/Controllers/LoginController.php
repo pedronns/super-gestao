@@ -28,12 +28,13 @@ class LoginController extends Controller
         // autenticação manual, apenas para estudo
 
         $regras = [
-            'usuario' => 'email',
+            'usuario' => 'email|required',
             'senha' => 'required'
         ];
 
         $feedback = [
             'usuario.email' => 'Insira um e-mail válido',
+            'usuario.required' => 'Insira um e-mail',
             'senha.required' => 'Insira uma senha'
         ];
 

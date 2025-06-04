@@ -10,16 +10,16 @@
 
         <div class="flex justify-center mt-6">
             <ul class="flex gap-4">
-                <li><a href="" class="text-[#333] hover:text-[#268fd0]">Voltar</a></li>
+                <li><a href="{{route('app.produto.index')}}" class="text-[#333] hover:text-[#268fd0]">Voltar</a></li>
             </ul>
         </div>
 
         <div class="text-center mt-10">
             <h2 class="text-3xl font-bold text-gray-900 mb-2">
-                {{ $produto_detalhe->item->nome }}
+                {{ $produto_detalhe->produto->nome }}
             </h2>
             <p class="text-base text-gray-600 mb-6">
-                {{ $produto_detalhe->item->descricao }}
+                {{ $produto_detalhe->produto->descricao }}
             </p>
 
 

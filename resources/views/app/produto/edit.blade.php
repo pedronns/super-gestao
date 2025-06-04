@@ -12,6 +12,9 @@
             <ul class="flex gap-4">
                 <li><a href="{{ route('app.produto.index') }}" class="text-[#333] hover:text-[#268fd0]">Voltar</a></li>
             </ul>
+            {{-- <ul class="flex gap-4">
+                <li><a href="{{ route('app.produto-detalhe.edit', $produto->id) }}" class="text-[#333] hover:text-[#268fd0]">Editar detalhes</a></li>
+            </ul> --}}
         </div>
 
         <div class="text-center mt-10">

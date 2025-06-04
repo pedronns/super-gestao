@@ -30,6 +30,7 @@
                         <th class="px-4 py-2 text-center"></th>
                         <th class="px-4 py-2 text-center"></th>
                         <th class="px-4 py-2 text-center"></th>
+                        <th class="px-4 py-2 text-center"></th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
@@ -38,6 +39,11 @@
                             <tr class="hover:bg-gray-50">
                                 <td class="px-4 py-2 whitespace-nowrap">{{ $pedido->id }}</td>
                                 <td class="px-4 py-2 whitespace-nowrap">{{ $pedido->cliente_id }}</td>
+
+                                {{-- Adicionar produtos --}}
+                                <td class="px-4 py-2 text-blue-600 cursor-pointer hover:underline text-center font-bold">
+                                    <a href="{{ route('app.pedido-produto.create', ['pedido' => $pedido->id]) }}">Adicionar produtos</a>
+                                </td>
 
                                 {{-- Visualizar --}}
                                 <td class="px-4 py-2 text-blue-600 cursor-pointer hover:underline text-center font-bold">

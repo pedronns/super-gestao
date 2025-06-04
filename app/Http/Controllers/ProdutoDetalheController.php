@@ -67,7 +67,13 @@ class ProdutoDetalheController extends Controller
 
     public function edit($id)
     {
-        $produto_detalhe = ItemDetalhe::find($id);
+        // Buscar ProdutoDetalhe pelo produto_id (chave única)
+        $produto_detalhe = ProdutoDetalhe::with('produto')->where('produto_id', $id)->first();
+
+        if (!$produto_detalhe) {
+            abort(404, 'Detalhes do produto não encontrados.');
+        }
+        
         $unidades = Unidade::all();
         return view('app.produto_detalhe.edit', ['produto_detalhe' => $produto_detalhe, 'unidades' => $unidades]);
     }
