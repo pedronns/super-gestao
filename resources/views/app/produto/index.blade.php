@@ -80,13 +80,15 @@
                                 </tr>
 
                                 <tr class="hover:bg-gray-50">
-                                    <td colspan="12">
+                                    <td colspan="12" class="text-center">
                                         @if ($produto->pedidos->isNotEmpty())
                                             <p class="font-semibold mb-1">ID dos pedidos</p>
                                             @foreach ($produto->pedidos as $pedido)
                                                 <a href="{{ route('app.pedido-produto.create', ['pedido' => $pedido->id]) }}"
                                                     class="text-blue-600 hover:underline">
-                                                    {{ $pedido->id }}@if (!$loop->last), @endif
+                                                    {{ $pedido->id }}@if (!$loop->last)
+                                                        ,
+                                                    @endif
                                                 </a>
                                             @endforeach
                                         @else
