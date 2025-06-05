@@ -61,30 +61,6 @@
         @endif
     </div>
 
-    {{-- Unidade --}}
-    <div class="relative mb-6">
-        <select
-            name="unidade_id"
-            class="w-full p-[10px_15px] box-border rounded-[5px] bg-inherit text-[#333]
-                {{ $errors->has('unidade_id') ? 'border border-red-500' : 'border border-[#333]' }}"
-        >
-            <option value="">Selecione a unidade</option>
-            @foreach ($unidades as $unidade)
-                <option
-                    value="{{ $unidade->id }}"
-                    {{ (old('unidade_id', $produto_detalhe->unidade_id ?? '') == $unidade->id) ? 'selected' : '' }}
-                >
-                    {{ $unidade->descricao }}
-                </option>
-            @endforeach
-        </select>
-        @if ($errors->has('unidade_id'))
-            <div class="absolute top-[32px] right-[10px] bg-white p-1 text-xs text-red-600">
-                {{ $errors->first('unidade_id') }}
-            </div>
-        @endif
-    </div>
-
     <button
         type="submit"
         class="w-full p-[10px_15px] my-[10px] rounded-[3px] bg-[#7ab829] text-white hover:bg-[#6ea22c]"
