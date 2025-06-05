@@ -13,11 +13,9 @@ class ProdutoDetalheController extends Controller
     private function regrasValidacao(): array
     {
         return [
-            'produto_id' => 'required|integer|exists:produtos,id|unique:produto_detalhes,produto_id',
             'comprimento' => 'required|integer',
             'largura' => 'required|integer',
             'altura' => 'required|integer',
-            'unidade_id' => 'required|exists:unidades,id',
         ];
     }
 
@@ -35,9 +33,6 @@ class ProdutoDetalheController extends Controller
             'comprimento.required' => 'Informe o comprimento.',
             'largura.required' => 'Informe a largura.',
             'altura.required' => 'Informe a altura.',
-
-            'unidade_id.required' => 'Informe a unidade.',
-            'unidade_id.exists' => 'A unidade selecionada não existe.',
 ];
     }
 
@@ -46,20 +41,38 @@ class ProdutoDetalheController extends Controller
         //
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        $produto_id = $request->get('produto_id');
+        $produto = \App\Models\Produto::findOrFail($produto_id);
+
+        $produto_detalhe = new \App\Models\ProdutoDetalhe(); // objeto vazio
         $unidades = Unidade::all();
-        return view('app.produto_detalhe.create', ['unidades' => $unidades]);
+
+        return view('app.produto_detalhe.create', [
+            'unidades' => $unidades,
+            'produto' => $produto,
+            'produto_detalhe' => $produto_detalhe, // para evitar erros na view
+        ]);
     }
 
     public function store(Request $request)
     {
         $request->validate($this->regrasValidacao(), $this->feedbackValidacao());
 
-        ProdutoDetalhe::create($request->all());
-        echo 'Cadastro realizado';
-    }
+        // Busca o produto para pegar a unidade_id
+        $produto = \App\Models\Produto::findOrFail($request->input('produto_id'));
 
+        ProdutoDetalhe::create([
+            'produto_id' => $request->input('produto_id'),
+            'comprimento' => $request->input('comprimento'),
+            'largura' => $request->input('largura'),
+            'altura' => $request->input('altura'),
+            'unidade_id' => $produto->unidade_id,
+        ]);
+
+        return redirect()->route('app.produto.index');
+    }
     public function show(string $id)
     {
         //
@@ -67,21 +80,30 @@ class ProdutoDetalheController extends Controller
 
     public function edit($id)
     {
-        // Buscar ProdutoDetalhe pelo produto_id (chave única)
-        $produto_detalhe = ProdutoDetalhe::with('produto')->where('produto_id', $id)->first();
-
-        if (!$produto_detalhe) {
-            abort(404, 'Detalhes do produto não encontrados.');
-        }
-        
+        $produto_detalhe = ProdutoDetalhe::with('produto')->findOrFail($id);
         $unidades = Unidade::all();
-        return view('app.produto_detalhe.edit', ['produto_detalhe' => $produto_detalhe, 'unidades' => $unidades]);
+
+        return view('app.produto_detalhe.edit', [
+            'produto_detalhe' => $produto_detalhe,
+            'produto' => $produto_detalhe->produto,
+            'unidades' => $unidades
+        ]);
     }
 
     public function update(Request $request, ProdutoDetalhe $produto_detalhe)
     {
+        $regras = [
+        'comprimento' => 'required|integer',
+        'largura' => 'required|integer',
+        'altura' => 'required|integer',
+        'unidade_id' => 'required|exists:unidades,id',
+    ];
+
+        $request->validate($regras, $this->feedbackValidacao());
+
         $produto_detalhe->update($request->all());
-        echo 'Atualização realizada';
+
+        return redirect()->route('app.produto.index');
     }
 
     public function destroy(string $id)

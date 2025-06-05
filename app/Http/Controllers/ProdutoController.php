@@ -48,9 +48,8 @@ class ProdutoController extends Controller
 
     public function index(Request $request)
     {
-        $produtos = Item::paginate(10);
-
-        return view('app.produto.index', ['produtos' => $produtos, 'request' => $request->all()]);
+        $produtos = Produto::with('unidade', 'fornecedor', 'produtoDetalhe', 'pedidos')->paginate(10);
+        return view('app.produto.index', compact('produtos'));
     }
 
     public function create(Request $request)
@@ -79,7 +78,7 @@ class ProdutoController extends Controller
         $unidades = Unidade::all();
         $fornecedores = Fornecedor::all();
 
-        return view('app.produto.edit', ['produto'=> $produto, 'unidades' => $unidades, 'fornecedores' => $fornecedores]);
+        return view('app.produto.edit', ['produto' => $produto, 'unidades' => $unidades, 'fornecedores' => $fornecedores]);
     }
 
     public function update(Request $request, Item $produto)
@@ -93,6 +92,7 @@ class ProdutoController extends Controller
     public function destroy(Produto $produto)
     {
         $produto->pedidos()->detach();
+        $produto->produtoDetalhe()->delete();
         $produto->delete();
 
         return redirect()->route('app.produto.index');

@@ -32,13 +32,14 @@
                             <th class="px-4 py-2 text-center font-semibold">Descrição</th>
                             <th class="px-4 py-2 text-center font-semibold">Fornecedor</th>
                             <th class="px-4 py-2 text-center font-semibold">Peso</th>
-                            <th class="px-4 py-2 text-center font-semibold">Unidade ID</th>
+                            <th class="px-4 py-2 text-center font-semibold">Unidade</th>
                             <th class="px-4 py-2 text-center font-semibold">Comprimento</th>
                             <th class="px-4 py-2 text-center font-semibold">Largura</th>
                             <th class="px-4 py-2 text-center font-semibold">Altura</th>
-                            <th class="px-4 py-2 text-center"></th>
-                            <th class="px-4 py-2 text-center"></th>
-                            <th class="px-4 py-2 text-center"></th>
+                            <th class="px-4 py-2 text-center font-semibold">Detalhes</th> {{-- nova coluna --}}
+                            <th class="px-4 py-2 text-center"></th> {{-- Visualizar --}}
+                            <th class="px-4 py-2 text-center"></th> {{-- Excluir --}}
+                            <th class="px-4 py-2 text-center"></th> {{-- Editar produto --}}
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-gray-200">
@@ -47,12 +48,33 @@
                                 <tr class="hover:bg-gray-50">
                                     <td class="px-4 py-2 whitespace-nowrap">{{ $produto->nome }}</td>
                                     <td class="px-4 py-2 whitespace-nowrap">{{ $produto->descricao }}</td>
-                                    <td class="px-4 py-2 whitespace-nowrap">{{ $produto->fornecedor->nome }}</td>
+                                    <td class="px-4 py-2 whitespace-nowrap">
+                                        {{ $produto->fornecedor->nome ?? 'Sem fornecedor' }}</td>
                                     <td class="px-4 py-2 text-center">{{ $produto->peso }}</td>
-                                    <td class="px-4 py-2 text-center">{{ $produto->unidade_id }}</td>
-                                    <td class="px-4 py-2 text-center">{{ $produto->produtoDetalhe->comprimento ?? '' }}</td>
-                                    <td class="px-4 py-2 text-center">{{ $produto->produtoDetalhe->largura ?? '' }}</td>
-                                    <td class="px-4 py-2 text-center">{{ $produto->produtoDetalhe->altura ?? '' }}</td>
+                                    <td class="px-4 py-2 text-center">{{ $produto->unidade->unidade ?? 'Sem Unidade' }}</td>
+
+                                    {{-- Medidas se preenchidas / Botão para adicionar se vazias --}}
+                                    @if (empty($produto->produtoDetalhe->comprimento) &&
+                                            empty($produto->produtoDetalhe->largura) &&
+                                            empty($produto->produtoDetalhe->altura))
+                                        <td class="px-4 py-2 text-center" colspan="3">
+                                            <a href="{{ route('app.produto-detalhe.create') }}?produto_id={{ $produto->id }}"
+                                                class="text-green-600 hover:underline font-semibold">
+                                                Adicionar detalhes
+                                            </a>
+                                        </td>
+                                        <td class="px-4 py-2 text-center text-gray-400 italic">Sem detalhes</td>
+                                    @else
+                                        <td class="px-4 py-2 text-center">{{ $produto->produtoDetalhe->comprimento }}</td>
+                                        <td class="px-4 py-2 text-center">{{ $produto->produtoDetalhe->largura }}</td>
+                                        <td class="px-4 py-2 text-center">{{ $produto->produtoDetalhe->altura }}</td>
+                                        <td class="px-4 py-2 text-center">
+                                            <a href="{{ route('app.produto-detalhe.edit', ['produto_detalhe' => $produto->produtoDetalhe->id]) }}"
+                                                class="text-blue-600 hover:underline font-semibold">
+                                                Editar detalhes
+                                            </a>
+                                        </td>
+                                    @endif
 
                                     {{-- Visualizar --}}
                                     <td

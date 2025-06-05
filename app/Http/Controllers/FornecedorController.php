@@ -85,7 +85,15 @@ class FornecedorController extends Controller
     }
 
     public function excluir($id) {
-        Fornecedor::find($id)->delete();
+        $fornecedor_padrao_id = 1;
+
+        $fornecedor = Fornecedor::findOrFail($id);
+
+        $fornecedor->produtos()->update([
+            'fornecedor_id' => $fornecedor_padrao_id
+        ]);
+
+        $fornecedor->delete();
 
         return redirect()->route('app.fornecedor');
     }
