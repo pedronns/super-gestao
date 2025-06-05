@@ -11,4 +11,8 @@ class Produto extends Model
     public function produtoDetalhe() {
         return $this->hasOne('App\Models\ProdutoDetalhe');
     }
+
+    public function pedidos() {
+        return $this->belongsToMany('App\Models\Pedido', 'pedidos_produtos', 'produto_id', 'pedido_id');
+    }
 }

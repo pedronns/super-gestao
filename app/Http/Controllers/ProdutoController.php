@@ -92,7 +92,9 @@ class ProdutoController extends Controller
 
     public function destroy(Produto $produto)
     {
+        $produto->pedidos()->detach();
         $produto->delete();
+
         return redirect()->route('app.produto.index');
     }
 }

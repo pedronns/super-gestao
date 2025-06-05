@@ -90,7 +90,9 @@ class ClienteController extends Controller
      */
     public function destroy(Cliente $cliente)
     {
+        $cliente->pedidos()->delete();
         $cliente->delete();
+
         return redirect()->route('app.cliente.index');
     }
 }

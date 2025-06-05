@@ -89,7 +89,9 @@ class PedidoController extends Controller
      */
     public function destroy(Pedido $pedido)
     {
+        $pedido->produtos()->detach();
         $pedido->delete();
+
         return redirect()->route('app.pedido.index');
     }
 }
